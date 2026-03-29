@@ -7,6 +7,8 @@ pool:
 steps:
 - script: echo "Building the project..."
   displayName: 'Build'
+- script: echo "Creating container image "
+  displayName: 'Build Container Image'
 - script: echo "Running tests..."
   displayName: 'Test'
 - script: echo "Deploying the application..."
