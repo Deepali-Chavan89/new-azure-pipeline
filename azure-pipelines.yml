@@ -6,12 +6,9 @@ pool:
 
 steps:
 - script: | 
-    git --version 
-    echo "checked git version"
-    docker --version
-    echo "checked docker version"
-    wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(grep -oP '(?<=UBUNTU_CODENAME=).*' /etc/os-release || lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-    sudo apt update && sudo apt install terraform
-    terraform --version
-  displayName: 'Tools Check'
+    echo " Installing python 3.8"
+    sudo apt-get update
+    sudo apt-get install python3 -y
+    python3 --version
+    python3 helloworld.py
+  displayName: 'Run Python Script'
