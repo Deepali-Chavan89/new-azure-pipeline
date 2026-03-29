@@ -5,19 +5,13 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: echo "Building the project..."
-  displayName: 'Build'
-- script: echo "Creating container image "
-  displayName: 'Build Container Image'
-- script: echo "Running tests..."
-  displayName: 'Test'
-- script: echo "Deploying the application..."
-  displayName: 'Deploy'
-- script:
+- script: |
   git --version
   echo "checking git version"
   docker --version
   echo "checking docker version"
+  wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+  echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(grep -oP '(?<=UBUNTU_CODENAME=).*' /etc/os-release || lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+  sudo apt update && sudo apt install terraform
   terraform --version
-  echo "checking terraform version"
-  displayname: 'Check Git and Docker Versions'
+  displayname: 'tools check'
