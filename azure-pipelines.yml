@@ -13,3 +13,11 @@ steps:
   displayName: 'Test'
 - script: echo "Deploying the application..."
   displayName: 'Deploy'
+- script:
+  git --version
+  echo "checking git version"
+  docker --version
+  echo "checking docker version"
+  terraform --version
+  echo "checking terraform version"
+  displayname: 'Check Git and Docker Versions'
